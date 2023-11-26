@@ -1339,7 +1339,7 @@ declare namespace Deno {
    */
   export function cron(
     name: string,
-    schedule: string,
+    schedule: string | Schedule,
     handler: () => Promise<void> | void,
     options: { backoffSchedule?: number[]; signal?: AbortSignal },
   ): Promise<void>;
@@ -1362,7 +1362,7 @@ declare namespace Deno {
    */
   export function cron(
     name: string,
-    schedule: string,
+    schedule: string | Schedule,
     handler: () => Promise<void> | void,
   ): Promise<void>;
 
@@ -1392,7 +1392,7 @@ declare namespace Deno {
    */
   export function cron(
     name: string,
-    schedule: string,
+    schedule: string | Schedule,
     options: { backoffSchedule?: number[]; signal?: AbortSignal },
     handler: () => Promise<void> | void,
   ): Promise<void>;
