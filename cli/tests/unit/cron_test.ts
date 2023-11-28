@@ -100,7 +100,7 @@ Deno.test(function invalidScheduleTest() {
     "Invalid cron schedule",
   );
   assertThrows(
-    () => Deno.cron("abc", { minute1: 0 }, () => {}),
+    () => Deno.cron("abc", { minute: { end: 10, every: 2 } }, () => {}),
     TypeError,
     "Invalid cron schedule",
   );
@@ -110,7 +110,7 @@ Deno.test(function invalidScheduleTest() {
     "Invalid cron schedule",
   );
   assertThrows(
-    () => Deno.cron("abc", { minute: 0, year: 4 }, () => {}),
+    () => Deno.cron("abc", { minute: 80 }, () => {}),
     TypeError,
     "Invalid cron schedule",
   );
@@ -120,7 +120,7 @@ Deno.test(function invalidScheduleTest() {
     "Invalid cron schedule",
   );
   assertThrows(
-    () => Deno.cron("fgh", { year: 12 }, () => {}),
+    () => Deno.cron("fgh", { dayOfWeek: 90 }, () => {}),
     TypeError,
     "Invalid cron schedule",
   );
