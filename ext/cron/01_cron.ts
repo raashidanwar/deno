@@ -3,7 +3,7 @@
 // @ts-ignore internal api
 const core = Deno.core;
 
-function formateToCronSchedule(
+export function formatToCronSchedule(
   value?: number | { exact: number | number[] } | {
     start?: number;
     end?: number;
@@ -22,16 +22,14 @@ function formateToCronSchedule(
         end?: number;
         every?: number;
       };
-      if (start === undefined && end === undefined && every === undefined) {
-        return "*";
-      } else if (
-        start !== undefined && end !== undefined && every !== undefined
-      ) {
+      if (start !== undefined && end !== undefined && every !== undefined) {
         return start + "-" + end + "/" + every;
       } else if (start !== undefined && end !== undefined) {
         return start + "-" + end;
       } else if (start !== undefined && every !== undefined) {
         return start + "/" + every;
+      } else if (start !== undefined) {
+        return start + "/1";
       } else if (end === undefined && every !== undefined) {
         return "*/" + every;
       } else {
@@ -47,7 +45,7 @@ function formateToCronSchedule(
   }
 }
 
-function parseScheduleToString(schedule: string | Deno.Schedule): string {
+function parseScheduleToString(schedule: string | Deno.CronSchedule): string {
   if (typeof schedule === "string") {
     return schedule;
   } else {
@@ -59,17 +57,17 @@ function parseScheduleToString(schedule: string | Deno.Schedule): string {
       dayOfWeek,
     } = schedule;
 
-    return formateToCronSchedule(minute) +
-      " " + formateToCronSchedule(hour) +
-      " " + formateToCronSchedule(dayOfMonth) +
-      " " + formateToCronSchedule(month) +
-      " " + formateToCronSchedule(dayOfWeek);
+    return formatToCronSchedule(minute) +
+      " " + formatToCronSchedule(hour) +
+      " " + formatToCronSchedule(dayOfMonth) +
+      " " + formatToCronSchedule(month) +
+      " " + formatToCronSchedule(dayOfWeek);
   }
 }
 
 function cron(
   name: string,
-  schedule: string | Deno.Schedule,
+  schedule: string | Deno.CronSchedule,
   handlerOrOptions1:
     | (() => Promise<void> | void)
     | ({ backoffSchedule?: number[]; signal?: AbortSignal }),
