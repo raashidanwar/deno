@@ -1317,8 +1317,10 @@ declare namespace Deno {
    */
   export function openKv(path?: string): Promise<Deno.Kv>;
 
-  /** **UNSTABLE**: New CronScheduleExpression is used as the type of `minute`,
-   * `hour`, `dayOfMonth`, `month`, and `dayOfWeek` in {@linkcode CronSchedule}.
+  /** **UNSTABLE**: New API, yet to be vetted.
+   * 
+   * CronScheduleExpression is used as the type of `minute`,hour`, 
+   * `dayOfMonth`, `month`, and `dayOfWeek` in {@linkcode CronSchedule}.
    * @category Cron
    */
   type CronScheduleExpression = number | { exact: number | number[] } | {
@@ -1327,7 +1329,9 @@ declare namespace Deno {
     every?: number;
   };
 
-  /** **UNSTABLE**: New CronSchedule is the interface used for JSON format
+  /** **UNSTABLE**: New API, yet to be vetted.
+   * 
+   * CronSchedule is the interface used for JSON format
    * cron `schedule`.
    * @category Cron
    */
